@@ -1,3 +1,4 @@
+import OwnerMenuButton from "../../components/OwnerMenuButton";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useSearchParams, Navigate } from "react-router-dom";
 import io from "socket.io-client";
@@ -943,7 +944,8 @@ export default function SupplierDashboard() {
 
     return (
         <div className="theme-page min-h-screen flex flex-col relative">
-            {/* TOP HEADER BAR */}
+            {/* TOP HEADER BAR — DASHBOARD PAGE ONLY */}
+            {activeTab === "dashboard" && (
             <header className="sticky top-0 z-40 px-4 sm:px-6 py-3 border-b border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-2xs">
                 <div className="w-full flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -1005,6 +1007,7 @@ export default function SupplierDashboard() {
                     </div>
                 </div>
             </header>
+            )}
 
             {/* COLLAPSIBLE SIDEBAR MENU DRAWER OVERLAY — EXACT OWNER PANEL DESIGN MATCH */}
             {sidebarOpen && (
@@ -1328,7 +1331,8 @@ export default function SupplierDashboard() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
                                 <div className="flex items-center gap-3">
-                                    <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                                    <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                        <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                         <Bell className="theme-accent-text" />
                                         Notifications
                                     </h2>
@@ -1762,7 +1766,10 @@ export default function SupplierDashboard() {
                 {isAccountActive && activeTab === "products" && (
                     <div className="space-y-4">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-xl font-bold tracking-tight">Catalog Products</h2>
+                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                            <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
+                            Catalog Products
+                        </h2>
                             <button
                                 type="button"
                                 onClick={() => setShowAddProductModal(true)}
@@ -1834,7 +1841,10 @@ export default function SupplierDashboard() {
                 {/* TAB 2: B2B ORDERS */}
                 {isAccountActive && activeTab === "orders" && (
                     <div className="space-y-4">
-                        <h2 className="text-xl font-bold tracking-tight">Live B2B Restaurant Orders</h2>
+                        <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                            <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
+                            Live B2B Restaurant Orders
+                        </h2>
                         {orders.length === 0 ? (
                             <div className="theme-panel rounded-3xl p-12 text-center border space-y-3">
                                 <ShoppingBag size={40} className="mx-auto theme-accent-text" />
@@ -1899,7 +1909,10 @@ export default function SupplierDashboard() {
                     <div className="space-y-6">
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-3">
                             <div>
-                                <h2 className="text-xl font-bold tracking-tight">Sales Analytics & Revenue Overview</h2>
+                                <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                    <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
+                                    Sales Analytics & Revenue Overview
+                                </h2>
                                 <p className="theme-muted text-xs mt-0.5">Monitor B2B restaurant sales, orders, customers, products and supplier payouts.</p>
                             </div>
                             <span className="inline-flex items-center rounded-lg bg-orange-500/10 px-2.5 py-1 text-xs font-extrabold text-orange-500 uppercase tracking-wider self-start md:self-auto">
@@ -2115,7 +2128,10 @@ export default function SupplierDashboard() {
                 {/* TAB 4: B2B RESTAURANT CUSTOMERS */}
                 {isAccountActive && activeTab === "customers" && (
                     <div className="space-y-4">
-                        <h2 className="text-xl font-bold tracking-tight">B2B Restaurant Customers</h2>
+                        <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                            <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
+                            B2B Restaurant Customers
+                        </h2>
                         <p className="theme-muted text-xs">Restaurants that have placed supply orders with your business</p>
 
                         {customers.length === 0 ? (
@@ -2156,7 +2172,8 @@ export default function SupplierDashboard() {
                         {/* HEADER SECTION */}
                         <div className="pb-3 border-b border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                             <div>
-                                <h2 className="text-xl font-black tracking-tight flex items-center gap-2 text-slate-900 dark:text-slate-100">
+                                <h2 className="text-xl font-black tracking-tight flex items-center gap-2.5 text-slate-900 dark:text-slate-100">
+                                    <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                     <Handshake size={22} className="text-orange-500" />
                                     B2B PRICE NEGOTIATIONS & CHAT
                                 </h2>
@@ -2538,7 +2555,8 @@ export default function SupplierDashboard() {
                         {/* HEADER SECTION WITH SUBTLE LINE DIVIDER */}
                         <div className="pb-3 border-b border-slate-200/80 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3">
                             <div>
-                                <h2 className="text-xl font-black tracking-tight flex items-center gap-2 text-slate-900 dark:text-slate-100">
+                                <h2 className="text-xl font-black tracking-tight flex items-center gap-2.5 text-slate-900 dark:text-slate-100">
+                                    <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                     <CreditCard size={20} className="text-orange-500" />
                                     Vendor Payouts & Financial Settlement Ledger
                                 </h2>
@@ -2700,7 +2718,8 @@ export default function SupplierDashboard() {
                 {isAccountActive && activeTab === "supply-reports" && (
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                 <BarChart3 className="theme-accent-text" />
                                 Supplier Performance & Revenue Analytics
                             </h2>
@@ -2734,7 +2753,8 @@ export default function SupplierDashboard() {
                         {/* Header & Add Button */}
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div>
-                                <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                                <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                    <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                     <ShoppingBag className="theme-accent-text" />
                                     Tiffzy Wholesale Supply Marketplace Listings
                                 </h2>
@@ -3014,7 +3034,8 @@ export default function SupplierDashboard() {
                 {isAccountActive && activeTab === "consumption" && (
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                 <Activity className="theme-accent-text" />
                                 Bulk Demand & Client Consumption Trends
                             </h2>
@@ -3042,7 +3063,8 @@ export default function SupplierDashboard() {
                 {isAccountActive && activeTab === "wastage" && (
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                 <Trash2 className="theme-accent-text" />
                                 Transit Damage & Return Log
                             </h2>
@@ -3061,7 +3083,8 @@ export default function SupplierDashboard() {
                 {isAccountActive && activeTab === "stock-counts" && (
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                 <ClipboardCheck className="theme-accent-text" />
                                 Supplier Warehouse Stock Audit
                             </h2>
@@ -3092,7 +3115,8 @@ export default function SupplierDashboard() {
                 {isAccountActive && activeTab === "stock-transfers" && (
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2">
+                            <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                                <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
                                 <ArrowLeftRight className="theme-accent-text" />
                                 Dispatch & Logistics Transfers Log
                             </h2>
@@ -3125,7 +3149,10 @@ export default function SupplierDashboard() {
                 {/* TAB 6: ACTIVE PROFILE VIEW FOR VERIFIED SUPPLIERS */}
                 {isAccountActive && activeTab === "profile" && (
                     <div className="space-y-6">
-                        <h2 className="text-xl font-bold tracking-tight">Supplier Profile & Business KYC Compliance</h2>
+                        <h2 className="text-xl font-bold tracking-tight flex items-center gap-2.5">
+                            <OwnerMenuButton onClick={() => setSidebarOpen(true)} />
+                            Supplier Profile & Business KYC Compliance
+                        </h2>
 
                         <form onSubmit={handleSaveProfile} className="theme-panel rounded-3xl p-6 border space-y-5">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -73,6 +73,13 @@ export default function SupplyChainSubNav() {
     const location = useLocation();
     const currentPath = location.pathname;
 
+    // Per design requirements: Keep full top nav/subnav on Dashboard ONLY.
+    // Hide top subnav on all other supply chain pages.
+    const isDashboard = currentPath === "/supply-chain" || currentPath === "/supply-chain/";
+    if (!isDashboard) {
+        return null;
+    }
+
     let activeSubNav = null;
     if (currentPath.startsWith("/supply-chain/inventory")) {
         activeSubNav = INVENTORY_SUB_NAV;
